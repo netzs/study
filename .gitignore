@@ -1,0 +1,10 @@
+
+# IDEA cache directory
+.idea/
+
+# GIT conflict files
+*.orig
+
+bin
+packages
+obj
