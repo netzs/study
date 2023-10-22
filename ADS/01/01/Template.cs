@@ -43,38 +43,122 @@ namespace AlgorithmsDataStructures
         public List<Node> FindAll(int _value)
         {
             List<Node> nodes = new List<Node>();
-            // здесь будет ваш код поиска всех узлов по заданному значению
+            var node = head;
+            while (node != null)
+            {
+                if (node.value == _value)
+                {
+                    nodes.Add(node);
+                }
+
+                node = node.next;
+            }
+
             return nodes;
         }
 
         public bool Remove(int _value)
         {
-            // здесь будет ваш код удаления одного узла по заданному значению
-            return true; // если узел был удалён
+            var node = head;
+            Node prev = null;
+            while (node != null)
+            {
+                if (node.value == _value)
+                {
+                    if (prev == null)
+                    {
+                        head = node.next;
+                    }
+                    else
+                    {
+                        prev.next = node.next;
+                    }
+
+                    if (node == tail)
+                    {
+                        tail = prev;
+                    }
+
+                    return true;
+                }
+
+                prev = node;
+                node = node.next;
+            }
+
+            return false;
         }
 
         public void RemoveAll(int _value)
         {
-            // здесь будет ваш код удаления всех узлов по заданному значению
+            var node = head;
+            Node prev = null;
+
+            while (node != null)
+            {
+                if (node.value == _value)
+                {
+                    if (node == head)
+                    {
+                        head = node.next;
+                        node = head;
+                    }
+                    else
+                    {
+                        prev.next = node.next;
+                        node = node.next;
+                    }
+                }
+                else
+                {
+                    prev = node;
+                    node = node.next;
+                }
+            }
+
+            tail = prev;
         }
 
         public void Clear()
         {
-            // здесь будет ваш код очистки всего списка
+            head = null;
+            tail = null;
         }
 
         public int Count()
         {
-            return 0; // здесь будет ваш код подсчёта количества элементов в списке
+            var node = head;
+            var count = 0;
+            while (node != null)
+            {
+                node = node.next;
+                count++;
+            }
+
+            return count;
         }
 
         public void InsertAfter(Node _nodeAfter, Node _nodeToInsert)
         {
-            // здесь будет ваш код вставки узла после заданного
+            if (_nodeAfter == null)
+            {
+                if (head == null)
+                {
+                    tail = _nodeToInsert;
+                }
 
-            // если _nodeAfter = null , 
-            // добавьте новый элемент первым в списке 
+                _nodeToInsert.next = head;
+                head = _nodeToInsert;
+            }
+            else
+            {
+                _nodeToInsert.next = _nodeAfter.next;
+                _nodeAfter.next = _nodeToInsert;
+                if (_nodeToInsert.next == null)
+                {
+                    tail = _nodeToInsert;
+                }
+            }
         }
-
     }
 }
