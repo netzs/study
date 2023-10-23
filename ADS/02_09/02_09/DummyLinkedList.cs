@@ -6,10 +6,8 @@ namespace AlgorithmsDataStructures
     public class Node
     {
         public int value;
-        public Node next => _next == null || _next.isDummy ? null : _next;
-        public Node prev => _prev == null || _prev.isDummy ? null : _prev;
-        
-        public bool isDummy;
+        public Node next => _next is DummyNode ? null : _next;
+        public Node prev => _prev is DummyNode ? null : _prev;
         
         public Node _next, _prev;
 
@@ -18,14 +16,13 @@ namespace AlgorithmsDataStructures
             value = _value;
             _next = null;
             _prev = null;
-            isDummy = false;
         }
-
-        public Node()
+    }
+    
+    public class DummyNode : Node
+    {
+        public DummyNode() : base(-1)
         {
-            _next = null;
-            _prev = null;
-            isDummy = true;
         }
     }
 
@@ -34,13 +31,11 @@ namespace AlgorithmsDataStructures
         public Node head => _head._next != _tail ? _head._next : null;
         public Node tail => _head._next != _tail ? _tail._prev : null;
         
-        public Node _head;
-        public Node _tail;
+        public DummyNode _head = new DummyNode();
+        public DummyNode _tail = new DummyNode();
 
         public LinkedList2()
         {
-            _head = new Node();
-            _tail = new Node();
             _head._next = _tail;
             _tail._prev = _head;
         }
