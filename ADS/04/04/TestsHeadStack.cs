@@ -9,7 +9,7 @@ namespace _04
         [Test]
         public void TestPush0()
         {
-            var stack = new Stack<int>();
+            var stack = new HeadStack<int>();
             Assert.True(stack.Size() == 0);
             stack.Push(1);
             Assert.True(stack.Size() == 1 && stack.Peek() == 1 && stack.Pop() == 1 && stack.Size() == 0);
@@ -18,7 +18,7 @@ namespace _04
         [Test]
         public void TestPush1()
         {
-            var stack = new Stack<int>();
+            var stack = new HeadStack<int>();
             const int size = 10000;
             for (var i = 0; i < size; i++)
             {
@@ -37,7 +37,7 @@ namespace _04
         [Test]
         public void TestPeek0()
         {
-            var stack = new Stack<int>();
+            var stack = new HeadStack<int>();
             const int size = 10000;
             for (var i = 0; i < size; i++)
             {
@@ -59,7 +59,7 @@ namespace _04
         [Test]
         public void TestEmpty()
         {
-            var stack = new Stack<int>();
+            var stack = new HeadStack<int>();
             Assert.True(stack.Peek() == default);
             for (int i = 0; i < 20; i++)
             {

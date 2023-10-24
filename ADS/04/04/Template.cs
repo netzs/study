@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace AlgorithmsDataStructures
 {
-
     public class Stack<T>
     {
         private readonly LinkedList<T> _stack = new LinkedList<T>();
@@ -20,9 +17,14 @@ namespace AlgorithmsDataStructures
 
         public T Pop()
         {
-            var last = _stack.Last;
-            _stack.RemoveLast();
-            return last.Value;
+            if (_stack.Count > 0)
+            {
+                var last = _stack.Last;
+                _stack.RemoveLast();
+                return last.Value;
+            }
+
+            return default(T);
         }
 	  
         public void Push(T val)
@@ -32,8 +34,7 @@ namespace AlgorithmsDataStructures
 
         public T Peek()
         {
-            return _stack.Last.Value;
+            return _stack.Count > 0 ? _stack.Last.Value : default(T); 
         }
     }
-
 }

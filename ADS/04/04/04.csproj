@@ -43,8 +43,14 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Bracket.cs" />
+        <Compile Include="HeadStack.cs" />
+        <Compile Include="PostfixExpression.cs" />
         <Compile Include="Template.cs" />
-        <Compile Include="Tests.cs"/>
+        <Compile Include="TestsBracket.cs" />
+        <Compile Include="TestsHeadStack.cs" />
+        <Compile Include="TestsPostfix.cs" />
+        <Compile Include="TestsTemplate.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>

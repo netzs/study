@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace _04
 {
     [TestFixture]
-    public class Tests
+    public class TestsTemplate
     {
         [Test]
         public void TestPush0()
