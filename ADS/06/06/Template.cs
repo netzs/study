@@ -25,7 +25,7 @@ namespace AlgorithmsDataStructures
         {
             if (_list.Count > 0)
             {
-                var value = _list.First.Value;
+                T value = _list.First.Value;
                 _list.RemoveFirst();
                 return value;
             }
@@ -36,7 +36,7 @@ namespace AlgorithmsDataStructures
         {
             if (_list.Count > 0)
             {
-                var value = _list.Last.Value;
+                T value = _list.Last.Value;
                 _list.RemoveLast();
                 return value;
             }

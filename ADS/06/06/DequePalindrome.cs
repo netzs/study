@@ -4,8 +4,8 @@
     {
         public static bool Check(string text)
         {
-            var deque = new Deque<char>();
-            foreach (var symbol in text)
+            Deque<char> deque = new Deque<char>();
+            foreach (char symbol in text)
             {
                 deque.AddTail(symbol);
             }
