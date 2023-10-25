@@ -27,6 +27,8 @@ namespace _06
             {
                 deque.AddTail(i);
             }
+
+            Assert.True(deque.Size() == 10);
             
             Assert.True(deque.RemoveFront() == 0);
             Assert.True(deque.RemoveTail() == 9);
