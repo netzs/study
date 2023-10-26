@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures
 {
-
     public class Node<T>
     {
         public T value;
@@ -32,60 +31,165 @@ namespace AlgorithmsDataStructures
         public int Compare(T v1, T v2)
         {
             int result = 0;
-            if(typeof(T) == typeof(String))
+            if (typeof(T) == typeof(String))
             {
-                // версия для лексикографического сравнения строк
+                string s1 = (v1 as String).Trim();
+                string s2 = (v2 as String).Trim();
+                result = Math.Sign(string.CompareOrdinal(s1, s2));
             }
-            else 
+            else if (v1 is IComparable cmp1 && v2 is IComparable cmp2)
             {
-                // универсальное сравнение
+                result = cmp1.CompareTo(cmp2);
             }
-      
+
             return result;
-            // -1 если v1 < v2
-            // 0 если v1 == v2
-            // +1 если v1 > v2
         }
 
         public void Add(T value)
         {
-            // автоматическая вставка value 
-            // в нужную позицию
+            Node<T> node = new Node<T>(value);
+            if (head == null)
+            {
+                head = node;
+                tail = head;
+                return;
+            }
+
+            int compare = CompareAsc(value, head.value);
+            if (compare <= 0)
+            {
+                node.next = head;
+                head.prev = node;
+                head = node;
+                return;
+            }
+
+            compare = CompareAsc(tail.value, value);
+            if (compare <= 0)
+            {
+                node.prev = tail;
+                tail.next = node;
+                tail = node;
+                return;
+            }
+
+            Node<T> cur = head;
+            while (head != null)
+            {
+                compare = CompareAsc(value, cur.value);
+                if (compare <= 0)
+                {
+                    node.next = cur;
+                    node.prev = cur.prev;
+                    cur.prev.next = node;
+                    cur.prev = node;
+                    return;
+                }
+
+                cur = cur.next;
+            }
+        }
+
+        public int CompareAsc(T a, T b)
+        {
+            return (_ascending ? 1 : -1) * Compare(a, b);
         }
 
         public Node<T> Find(T val)
         {
-            return null; // здесь будет ваш код
+            Node<T> node = head;
+            while (node != null)
+            {
+                int compare = CompareAsc(node.value, val);
+                if (compare == 0)
+                {
+                    return node;
+                }
+
+                if (compare == 1)
+                {
+                    return null;
+                }
+
+                node = node.next;
+            }
+
+            return null;
         }
 
         public void Delete(T val)
         {
-            // здесь будет ваш код
+            var node = head;
+            while (node != null)
+            {
+                var compare = CompareAsc(node.value, val);
+                if (compare == 0)
+                {
+                    RemoveNode(node);
+                    return;
+                }
+
+                if (compare == 1)
+                {
+                    return;
+                }
+
+                node = node.next;
+            }
+        }
+
+        private void RemoveNode(Node<T> node)
+        {
+            if (node.prev == null)
+            {
+                head = node.next;
+            }
+            else
+            {
+                node.prev.next = node.next;
+            }
+
+            if (node == tail)
+            {
+                tail = node.prev;
+            }
+            else
+            {
+                node.next.prev = node.prev;
+            }
         }
 
         public void Clear(bool asc)
         {
             _ascending = asc;
-            // здесь будет ваш код
+            head = null;
+            tail = null;
         }
 
         public int Count()
         {
-            return 0; // здесь будет ваш код подсчёта количества элементов в списке
+            Node<T> node = head;
+            int count = 0;
+            while (node != null)
+            {
+                node = node.next;
+                count++;
+            }
+
+            return count;
         }
 
-        List<Node<T>> GetAll() // выдать все элементы упорядоченного 
-            // списка в виде стандартного списка
+        public List<Node<T>> GetAll()
         {
             List<Node<T>> r = new List<Node<T>>();
             Node<T> node = head;
-            while(node != null)
+            while (node != null)
             {
                 r.Add(node);
                 node = node.next;
             }
+
             return r;
         }
     }
- 
 }
