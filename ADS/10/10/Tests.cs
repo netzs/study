@@ -202,6 +202,24 @@ namespace _10
 
         }
 
+        [Test]
+        public void TestLimit()
+        {
+            var set = new PowerSet<int>();
+            for (var i = 0; i < 100; i++)
+            {
+                for (int j = 0; j < 20000; j++)
+                {
+                    set.Put(j);
+                }
+                for (int j = 0; j < 20000; j++)
+                {
+                    set.Remove(j);
+                }
+            }
+            
+        }
+
         private Random _random = new Random();
 
         private string GetRandom()
