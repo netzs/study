@@ -7,12 +7,11 @@ namespace AlgorithmsDataStructures
     public class BloomFilter
     {
         public int filter_len;
-        private int[] data;
+        private int data;
 
         public BloomFilter(int f_len)
         {
             filter_len = f_len;
-            data = new int[(f_len + 31) / 32];
         }
 
         public int Hash1(string str1)
@@ -45,12 +44,12 @@ namespace AlgorithmsDataStructures
 
         private void AddBit(int index)
         {
-            data[index / 32] |= 1 << (index % 32);
+            data |= 1 << (index % 32);
         }
         
         private bool GetBit(int index)
         {
-            return (data[index / 32] & (1 << (index % 32))) != 0;
+            return (data & (1 << (index % 32))) != 0;
         }
 
         public bool IsValue(string str1)

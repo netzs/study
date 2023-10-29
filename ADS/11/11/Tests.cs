@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Sockets;
 using System.Text;
 using AlgorithmsDataStructures;
 using NUnit.Framework;
@@ -27,7 +26,7 @@ namespace _11
         [Test]
         public void TestHash()
         {
-            var blum = new BloomFilter(128);
+            var blum = new BloomFilter(32);
             for (int i = 0; i < 1000000; i++)
             {
                 Assert.True(blum.Hash1(GetRandom()) < 128);
