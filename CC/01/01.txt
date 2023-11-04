@@ -1,0 +1,38 @@
+dir - playerLookDirection
+// вектор направления взгляда игрока
+
+_useIcon - _useButtonHintView
+// компонент отвечающий за отображение подсказки о возможности взаимодействия с объектом
+
+currentProgress - sumLoadProgressContent
+// суммарный прогресс загрузки элементов контента (следующей командой будет делиться на количество элементов)
+
+oldIsShot - isShotLastFrame
+// был ли совершен выстрел в прошлый кадр
+
+offset - shotNowTickOffset
+// смещение выстрела относительно текущего тика
+
+result - cameraRaycastResult
+// успешность совершения рейкаста из камеры
+
+isVisible - isCharacterInTarget
+// наведен ли прицел на персонажа
+
+distance - raycastDistance
+// расстояние, на которое будет совершен рейкаст
+
+position - startAnimationPosition
+// позиция начала анимации
+
+animRndX - animationOffsetX
+// смещение анимации по оси X (задается случайной каждый запуск анимации)
+
+isRight - isRightSideAnimation
+// анимация должна проигрываться вправо
+
+value - _lastFrameSensitivityValue
+// величина чувствительности в прошлый кадр
+
+
+
