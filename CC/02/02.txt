@@ -1,0 +1,52 @@
+
+
+6.1
+position - viewportPosition
+// позиция маркера относительно экрана
+
+distance - distanceToCamera
+// расстояние от маркера до камеры
+
+centerWeight - aimAlpha
+// прозрачность маркера, видимого в прицел
+// все 3 примера были в классе про маркера
+
+isEnter - isEnterQuestArea
+// Игрок зашел в зону квеста
+
+loot - lootView
+// компонент с отображением лута
+
+6.2
+timeModel
+battleScreenFactory
+buttonView
+weaponViewDescription
+
+
+6.3
+Есть метод Raycast, внутри него используются переменные from и to, но когда вызывается метод, то переменные для параметров называются shotStartPosition и shotEndPosition.
+Аналогично есть класс Now с методом Get, который возвращает текущее время, но при его использовании переменная называется respawnTs.
+Аналогично класс Transform со свойством Position. Но при получении значения переменная называется carPosition.
+
+
+6.4
+
+isCharacterAndPlayerInSameVehicle - isInSomeVehicle
+// сам игрок и другой персонаж находятся в одном транспорте
+
+nextImpactIndicatorRotationZ - impactRotation
+// отклонение иконки анимации попадания
+
+crossroadPortMoveToPosition - toPosition
+// точка в которую будет сдвинут перекресток
+
+currentFullScreenScaleMultiplier - zoomScaleRatio
+// коэффициент, на которые перемножаются размеры иконок при зуме карты
+
+isBasePathSameAsPersistentPath - isEqualPaths
+// пути равны
+
+
+
+
