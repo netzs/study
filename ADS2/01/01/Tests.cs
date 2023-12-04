@@ -218,6 +218,23 @@ namespace _01
                 Assert.True(nodes[item] == tree.FindNodesByValue(item).First());
             }
         }
+        
+        [Test]
+        public void TestFind3()
+        {
+            var tree = new SimpleTree<string>(null);
+            var node0 = new SimpleTreeNode<string>("aaa", null);
+            var node1 = new SimpleTreeNode<string>("bbb", null);
+            var node2 = new SimpleTreeNode<string>("ccc", null);
+            var node3 = new SimpleTreeNode<string>("aaa", null);
+            tree.AddChild(null, node0);
+            tree.AddChild(node0, node1);
+            tree.AddChild(node1, node2);
+            tree.AddChild(node2, node3);
+
+            var fnd = tree.FindNodesByValue("aaa");
+            Assert.True(fnd.Contains(node0) && fnd.Contains(node3));
+        }
 
         [Test]
         public void TestFind2()
