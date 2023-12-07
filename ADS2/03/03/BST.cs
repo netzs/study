@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AlgorithmsDataStructures2
 {
@@ -303,7 +304,8 @@ namespace AlgorithmsDataStructures2
             return 1 + RoundCount(node.LeftChild) + RoundCount(node.RightChild);
         }
 
-        public List<BSTNode<T>> WideAllNodes()
+
+        public List<BSTNode> WideAllNodes()
         {
             List<BSTNode<T>> result = new List<BSTNode<T>>();
             Queue<BSTNode<T>> queue = new Queue<BSTNode<T>>();
@@ -327,15 +329,15 @@ namespace AlgorithmsDataStructures2
                 }
             }
 
-            return result;
+            return result.Select(item => (BSTNode)item);
         }
 
-        public List<BSTNode<T>> DeepAllNodes(int order)
+        public List<BSTNode> DeepAllNodes(int order)
         {
             var result = new List<BSTNode<T>>();
             if (Root == null)
             {
-                return result;
+                return new List<BSTNode>();
             }
 
             switch (order)
@@ -351,7 +353,7 @@ namespace AlgorithmsDataStructures2
                     break;
             }
 
-            return result;
+            return result.Select(item => (BSTNode)item);
         }
 
 
