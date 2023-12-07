@@ -1,18 +1,66 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace AlgorithmsDataStructures2
 {
-    public class BSTNode<T>
+    public class BSTNode
     {
         public int NodeKey; // ключ узла
-        public T NodeValue; // значение в узле
-        public BSTNode<T> Parent; // родитель или null для корня
-        public BSTNode<T> LeftChild; // левый потомок
-        public BSTNode<T> RightChild; // правый потомок	
+        public object NodeValue; // значение в узле
+        public BSTNode Parent; // родитель или null для корня
+        public BSTNode LeftChild; // левый потомок
+        public BSTNode RightChild; // правый потомок	
 
-        public BSTNode(int key, T val, BSTNode<T> parent)
+        public BSTNode(int key, object val, BSTNode parent)
+        {
+            NodeKey = key;
+            NodeValue = val;
+            Parent = parent;
+            LeftChild = null;
+            RightChild = null;
+        }
+    }
+    public class BSTNode<T> : BSTNode
+    {
+        // public int NodeKey; // ключ узла
+        public T NodeValue; // значение в узле
+        private BSTNode<T> _parent;
+        private BSTNode<T> _leftChild;
+        private BSTNode<T> _rightChild;
+
+        public BSTNode<T> Parent
+        {
+            get => _parent;
+            set
+            {
+                base.Parent = value;
+                _parent = value;
+            }
+        }
+
+        public BSTNode<T> LeftChild
+        {
+            get => _leftChild;
+            set
+            {
+                base.LeftChild = value;
+                _leftChild = value;
+            }
+        }
+
+        public BSTNode<T> RightChild
+        {
+            get => _rightChild;
+            set
+            {
+                base.RightChild = value;
+                _rightChild = value;
+            }
+        }
+
+        public BSTNode(int key, T val, BSTNode<T> parent) : base (key, val, parent)
         {
             NodeKey = key;
             NodeValue = val;
@@ -43,6 +91,7 @@ namespace AlgorithmsDataStructures2
     public partial class BST<T>
     {
         BSTNode<T> Root; // корень дерева, или null
+
 
         public BST(BSTNode<T> node)
         {
@@ -329,7 +378,7 @@ namespace AlgorithmsDataStructures2
                 }
             }
 
-            return result.Select(item => (BSTNode)item);
+            return result.Cast<BSTNode>().ToList();
         }
 
         public List<BSTNode> DeepAllNodes(int order)
@@ -353,7 +402,7 @@ namespace AlgorithmsDataStructures2
                     break;
             }
 
-            return result.Select(item => (BSTNode)item);
+            return result.Cast<BSTNode>().ToList();
         }
 
 

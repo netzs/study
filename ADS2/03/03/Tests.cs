@@ -297,7 +297,7 @@ namespace _03
             {
                 tree.AddKeyValue(item,0 );
             }
-
+        
             var wide = tree.WideAllNodes();
             var wideTest = new int[] {10, 3, 11, 1, 5, 15, 2, 4, 14, 16, 13, 17, 12};
             TestOrderResult(wide, wideTest);
@@ -311,12 +311,12 @@ namespace _03
             var preOrderText = new int[] {10, 3, 1, 2, 5, 4, 11, 15, 14, 13, 12, 16, 17};
             TestOrderResult(preOrder, preOrderText);
         }
-
+        
         [Test]
         public void TestOrder1()
         {
             var tree = new BST<int>(null);
-
+        
             var wide = tree.WideAllNodes();
             var empty = new int[] { };
             TestOrderResult(wide, empty);
@@ -327,8 +327,8 @@ namespace _03
             var preOrder = tree.DeepAllNodes(2);
             TestOrderResult(preOrder, empty);
         }
-
-
+        
+        
         [Test]
         public void TestInvert()
         {
@@ -338,14 +338,14 @@ namespace _03
             {
                 tree.AddKeyValue(item, 0);
             }
-
+        
             tree.Invert();
             var wide = tree.WideAllNodes();
             var wideTest = new int[] {10, 11, 3, 15, 5, 1, 16, 14, 4, 2, 17, 13, 12};
             TestOrderResult(wide, wideTest);
         }
-
-        private void TestOrderResult(List<BSTNode<int>> wide, int[] wideTest)
+        
+        private void TestOrderResult(List<BSTNode> wide, int[] wideTest)
         {
             Assert.True(wide.Count == wideTest.Length);
             for (int i = 0; i < wide.Count; i++)
@@ -353,5 +353,8 @@ namespace _03
                 Assert.True(wide[i].NodeKey == wideTest[i]);
             }
         }
+        
+        
+
     }
 }
