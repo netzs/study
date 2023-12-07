@@ -1,7 +1,7 @@
 ﻿
 namespace AlgorithmsDataStructures2
 {
-    public partial class BST
+    public partial class BST<T>
     {
         public void Invert()
         {
@@ -13,7 +13,7 @@ namespace AlgorithmsDataStructures2
             RoundInvert(Root);
         }
 
-        private void RoundInvert(BSTNode node)
+        private void RoundInvert(BSTNode<T> node)
         {
             (node.LeftChild, node.RightChild) = (node.RightChild, node.LeftChild);
             if (node.LeftChild != null)

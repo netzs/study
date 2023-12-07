@@ -3,16 +3,18 @@ using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures2
 {
-    public class BSTNode
+    public class BSTNode<T>
     {
-        public int NodeKey; // значение в узле
-        public BSTNode Parent; // родитель или null для корня
-        public BSTNode LeftChild; // левый потомок
-        public BSTNode RightChild; // правый потомок	
+        public int NodeKey; // ключ узла
+        public T NodeValue; // значение в узле
+        public BSTNode<T> Parent; // родитель или null для корня
+        public BSTNode<T> LeftChild; // левый потомок
+        public BSTNode<T> RightChild; // правый потомок	
 
-        public BSTNode(int key, BSTNode parent)
+        public BSTNode(int key, T val, BSTNode<T> parent)
         {
             NodeKey = key;
+            NodeValue = val;
             Parent = parent;
             LeftChild = null;
             RightChild = null;
@@ -20,10 +22,10 @@ namespace AlgorithmsDataStructures2
     }
 
     // промежуточный результат поиска
-    public class BSTFind
+    public class BSTFind<T>
     {
         // null если в дереве вообще нету узлов
-        public BSTNode Node;
+        public BSTNode<T> Node;
 
         // true если узел найден
         public bool NodeHasKey;
@@ -37,21 +39,20 @@ namespace AlgorithmsDataStructures2
         }
     }
 
-
-    public partial class BST
+    public partial class BST<T>
     {
-        BSTNode Root; // корень дерева, или null
+        BSTNode<T> Root; // корень дерева, или null
 
-        public BST(BSTNode node)
+        public BST(BSTNode<T> node)
         {
             Root = node;
         }
 
-        public BSTFind FindNodeByKey(int key)
+        public BSTFind<T> FindNodeByKey(int key)
         {
             if (Root == null)
             {
-                BSTFind findResult = new BSTFind
+                BSTFind<T> findResult = new BSTFind<T>
                 {
                     Node = null,
                     NodeHasKey = false,
@@ -63,11 +64,11 @@ namespace AlgorithmsDataStructures2
             return RoundFindByKey(key, Root);
         }
 
-        private BSTFind RoundFindByKey(int key, BSTNode node)
+        private BSTFind<T> RoundFindByKey(int key, BSTNode<T> node)
         {
             if (node.NodeKey == key)
             {
-                return new BSTFind()
+                return new BSTFind<T>()
                 {
                     Node = node,
                     NodeHasKey = true,
@@ -77,7 +78,7 @@ namespace AlgorithmsDataStructures2
 
             if (key < node.NodeKey && node.LeftChild == null)
             {
-                return new BSTFind()
+                return new BSTFind<T>()
                 {
                     Node = node,
                     NodeHasKey = false,
@@ -92,7 +93,7 @@ namespace AlgorithmsDataStructures2
 
             if (node.RightChild == null)
             {
-                return new BSTFind()
+                return new BSTFind<T>()
                 {
                     Node = node,
                     NodeHasKey = false,
@@ -103,15 +104,15 @@ namespace AlgorithmsDataStructures2
             return RoundFindByKey(key, node.RightChild);
         }
 
-        public bool AddKey(int key)
+        public bool AddKeyValue(int key, T val)
         {
-            BSTFind findResult = FindNodeByKey(key);
+            BSTFind<T> findResult = FindNodeByKey(key);
             if (findResult.NodeHasKey)
             {
                 return false;
             }
 
-            var addedNode = new BSTNode(key, findResult.Node);
+            var addedNode = new BSTNode<T>(key, val, findResult.Node);
             if (findResult.Node == null)
             {
                 Root = addedNode;
@@ -130,7 +131,7 @@ namespace AlgorithmsDataStructures2
             return true;
         }
 
-        public BSTNode FinMinMax(BSTNode FromNode, bool FindMax)
+        public BSTNode<T> FinMinMax(BSTNode<T> FromNode, bool FindMax)
         {
             if (FromNode == null)
             {
@@ -167,7 +168,7 @@ namespace AlgorithmsDataStructures2
             return true;
         }
 
-        private void DeleteNode(BSTNode node)
+        private void DeleteNode(BSTNode<T> node)
         {
             var isLeaf = node.LeftChild == null && node.RightChild == null;
             if (isLeaf)
@@ -191,10 +192,10 @@ namespace AlgorithmsDataStructures2
             DeleteNodeWithRightChild(node);
         }
 
-        private void DeleteNodeWithRightChild(BSTNode node)
+        private void DeleteNodeWithRightChild(BSTNode<T> node)
         {
-            BSTNode parent = node.Parent;
-            BSTNode right = node.RightChild;
+            BSTNode<T> parent = node.Parent;
+            BSTNode<T> right = node.RightChild;
             node.RightChild = null;
 
             if (parent == null)
@@ -207,10 +208,10 @@ namespace AlgorithmsDataStructures2
             SwapParentChild(node, right);
         }
 
-        private void DeleteNodeWithLeftChild(BSTNode node)
+        private void DeleteNodeWithLeftChild(BSTNode<T> node)
         {
-            BSTNode parent = node.Parent;
-            BSTNode left = node.LeftChild;
+            BSTNode<T> parent = node.Parent;
+            BSTNode<T> left = node.LeftChild;
             node.LeftChild = null;
 
             if (parent == null)
@@ -223,9 +224,9 @@ namespace AlgorithmsDataStructures2
             SwapParentChild(node, left);
         }
 
-        private void DeleteNodeWithTwoChild(BSTNode node)
+        private void DeleteNodeWithTwoChild(BSTNode<T> node)
         {
-            BSTNode nextValueNode = FinMinMax(node.RightChild, false);
+            BSTNode<T> nextValueNode = FinMinMax(node.RightChild, false);
             DeleteNode(nextValueNode);
             nextValueNode.LeftChild = node.LeftChild;
             nextValueNode.RightChild = node.RightChild;
@@ -251,9 +252,9 @@ namespace AlgorithmsDataStructures2
             SwapParentChild(node, nextValueNode);
         }
 
-        private static void SwapParentChild(BSTNode oldNode, BSTNode newNode)
+        private static void SwapParentChild(BSTNode<T> oldNode, BSTNode<T> newNode)
         {
-            BSTNode parent = oldNode.Parent;
+            BSTNode<T> parent = oldNode.Parent;
             if (parent.LeftChild == oldNode)
             {
                 parent.LeftChild = newNode;
@@ -267,9 +268,9 @@ namespace AlgorithmsDataStructures2
             newNode.Parent = parent;
         }
 
-        private void DeleteLeafNode(BSTNode node)
+        private void DeleteLeafNode(BSTNode<T> node)
         {
-            BSTNode parent = node.Parent;
+            BSTNode<T> parent = node.Parent;
             node.Parent = null;
             if (parent == null)
             {
@@ -292,7 +293,7 @@ namespace AlgorithmsDataStructures2
             return RoundCount(Root); // количество узлов в дереве
         }
 
-        private int RoundCount(BSTNode node)
+        private int RoundCount(BSTNode<T> node)
         {
             if (node == null)
             {
@@ -302,10 +303,10 @@ namespace AlgorithmsDataStructures2
             return 1 + RoundCount(node.LeftChild) + RoundCount(node.RightChild);
         }
 
-        public List<BSTNode> WideAllNodes()
+        public List<BSTNode<T>> WideAllNodes()
         {
-            List<BSTNode> result = new List<BSTNode>();
-            Queue<BSTNode> queue = new Queue<BSTNode>();
+            List<BSTNode<T>> result = new List<BSTNode<T>>();
+            Queue<BSTNode<T>> queue = new Queue<BSTNode<T>>();
             if (Root != null)
             {
                 queue.Enqueue(Root);
@@ -313,7 +314,7 @@ namespace AlgorithmsDataStructures2
 
             while (queue.Count > 0)
             {
-                BSTNode top = queue.Dequeue();
+                BSTNode<T> top = queue.Dequeue();
                 result.Add(top);
                 if (top.LeftChild != null)
                 {
@@ -329,9 +330,9 @@ namespace AlgorithmsDataStructures2
             return result;
         }
 
-        public List<BSTNode> DeepAllNodes(int order)
+        public List<BSTNode<T>> DeepAllNodes(int order)
         {
-            var result = new List<BSTNode>();
+            var result = new List<BSTNode<T>>();
             if (Root == null)
             {
                 return result;
@@ -354,7 +355,7 @@ namespace AlgorithmsDataStructures2
         }
 
 
-        private void RoundInOrder(BSTNode node, List<BSTNode> result)
+        private void RoundInOrder(BSTNode<T> node, List<BSTNode<T>> result)
         {
             if (node.LeftChild != null)
             {
@@ -369,7 +370,7 @@ namespace AlgorithmsDataStructures2
             }
         }
 
-        private void RoundPostOrder(BSTNode node, List<BSTNode> result)
+        private void RoundPostOrder(BSTNode<T> node, List<BSTNode<T>> result)
         {
             if (node.LeftChild != null)
             {
@@ -384,7 +385,7 @@ namespace AlgorithmsDataStructures2
             result.Add(node);
         }
 
-        private void RoundPreOrder(BSTNode node, List<BSTNode> result)
+        private void RoundPreOrder(BSTNode<T> node, List<BSTNode<T>> result)
         {
             result.Add(node);
 
