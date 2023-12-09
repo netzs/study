@@ -11,19 +11,17 @@ namespace _04
         public void TestCount()
         {
             var tree = new aBST(1);
-            Assert.True(tree.Tree.Length == 1);
-            tree = new aBST(2);
             Assert.True(tree.Tree.Length == 3);
-            tree = new aBST(3);
+            tree = new aBST(2);
             Assert.True(tree.Tree.Length == 7);
-            tree = new aBST(4);
+            tree = new aBST(3);
             Assert.True(tree.Tree.Length == 15);
         }
 
         [Test]
         public void TestAdd()
         {
-            var tree = new aBST(4);
+            var tree = new aBST(3);
             Assert.True(tree.AddKey(50) == 0);
             Assert.True(tree.AddKey(25) == 1);
             Assert.True(tree.AddKey(75) == 2);
@@ -64,7 +62,7 @@ namespace _04
         [Test]
         public void TestAdd2()
         {
-            var tree = new aBST(2);
+            var tree = new aBST(1);
             Assert.True(tree.FindKeyIndex(50) == 0);
             Assert.True(tree.AddKey(50) == 0);
             Assert.True(tree.AddKey(50) == 0);
