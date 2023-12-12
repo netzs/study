@@ -15,11 +15,12 @@ namespace AlgorithmsDataStructures2
 
         public void MakeHeap(int[] a, int depth)
         {
-            _size = a.Length;
+            _size = 0;
             HeapArray = new int [(1 << (depth + 1)) - 1];
-            Array.Copy(a, HeapArray, _size);
-            Array.Sort(HeapArray, 0, _size);
-            Array.Reverse(HeapArray, 0, _size);
+            foreach (var key in a)
+            {
+                Add(key);
+            }
         }
 
         public int GetMax()

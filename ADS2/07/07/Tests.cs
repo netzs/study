@@ -160,6 +160,23 @@ namespace _07
             Assert.True(heap.HeapArray[2] == 11);
             Assert.True(heap.HeapArray[3] == 5);
         }
+        
+        [Test]
+        public void TestAdd2()
+        {
+            var heap = new Heap();
+            heap.MakeHeap(new int[] {10,11,12,5,20}, 3);
+            Assert.True(heap.HeapArray[0] == 20);
+            Assert.True(heap.HeapArray[1] == 12);
+            Assert.True(heap.HeapArray[2] == 11);
+            Assert.True(heap.HeapArray[3] == 5);
+            Assert.True(heap.HeapArray[4] == 10);
+            Assert.True(heap.GetMax() == 20);
+            Assert.True(heap.HeapArray[0] == 12);
+            Assert.True(heap.HeapArray[1] == 10);
+            Assert.True(heap.HeapArray[2] == 11);
+            Assert.True(heap.HeapArray[3] == 5);
+        }
 
         private void Check(Heap heap, int[] ints)
         {
