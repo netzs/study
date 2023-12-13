@@ -43,7 +43,7 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Properties\SimpleTree.cs" />
+        <Compile Include="SimpleTree.cs" />
         <Compile Include="Tests.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
